@@ -38,7 +38,7 @@ public class LsdCubeScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (lsdcounter++ >= 10)
         {
@@ -71,7 +71,6 @@ public class LsdCubeScript : MonoBehaviour
             transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);
 
         this.transform.Translate(getTranslationDirection() * moveSpeed * Time.deltaTime);
-
 
 
     }
