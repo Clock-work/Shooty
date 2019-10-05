@@ -43,7 +43,7 @@ public class DefaultEnemy : MonoBehaviour
         }
         float startDegrees = Random.Range(0.0f, 360.0f);
 
-        return createNewEnemy(x, y, width, height, targetX, targetY, speed, rotationSpeed, startDegrees, "Prefabs/Enemies/ShootingEnemy");
+        return createNewEnemy(x, y, width, height, targetX, targetY, speed, rotationSpeed, startDegrees, "Prefabs/Enemies/DefaultEnemy");
     }
 
     public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed, float rotationSpeed, float startDegrees, string prefabName)
