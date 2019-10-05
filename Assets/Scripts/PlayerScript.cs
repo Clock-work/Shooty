@@ -80,7 +80,6 @@ public class PlayerScript : MonoBehaviour
             else
             {
                 int random = Random.Range(0, 2);
-                Debug.Log(random);
                 renderer.sprite = sprites[(int)ANIMATIONSTATE.MOVE_01 + random];
             }
         }

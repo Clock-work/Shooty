@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    [SerializeField]
+    public AudioSource source;
 
     [SerializeField]
     public GameObject Projectile;
@@ -18,6 +20,7 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         Projectile = (GameObject)Resources.Load("Prefabs/Projectile");
+        source = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class Shoot : MonoBehaviour
     {
         if(time >= cooldown)
         {
+            source.Play();
             Transform projectile = Instantiate(Projectile.transform, new Vector3(transform.position.x, transform.position.y, transform.position.z - 10f) + Vector3.forward * 10f, Quaternion.identity);
             projectile.rotation = transform.rotation;
             time = 0;
