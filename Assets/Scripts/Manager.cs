@@ -43,6 +43,9 @@ public class Manager : MonoBehaviour
         direction = gameobject;
     }
 
-    public void 
+    public void changeBoundSize()
+    {
+
+    }
 
 }
