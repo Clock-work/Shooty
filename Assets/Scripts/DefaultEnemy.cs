@@ -10,13 +10,29 @@ public class DefaultEnemy : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     private BoxCollider2D m_collider;
 
-    public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed)
+    public static DefaultEnemy createRandomEnemy()
     {
-        return createNewEnemy(new Vector2(x, y), new Vector2(width, height), new Vector2(targetX, targetY), moveSpeed);
+        var cameraMinPos = DefaultCamera.instance.getMinPos();
+        var cameraMaxPos = DefaultCamera.instance.getMaxPos();
+
+        float width = Random.Range(0.5f, 2f);
+        float height = Random.Range(0.5f, 2f);
+        float x = Random.Range(cameraMinPos.x + width, cameraMaxPos.x - width);
+        float y = Random.Range(cameraMinPos.y + height, cameraMaxPos.y - height);
+        float speed = Random.Range(0.5f, 5f);
+        float targetX = Random.Range(-10f, 10f);
+        float targetY = Random.Range(-10f, 10f);
+
+        return createNewEnemy(x, y, width, height, targetX, targetY, speed, "DefaultEnemy");
     }
-    public static DefaultEnemy createNewEnemy(Vector2 position, Vector2 size, Vector2 direction, float moveSpeed)
+
+    public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed, string prefabName)
     {
-        var gameobject = Instantiate((GameObject)Resources.Load("DefaultEnemy"), new Vector3(position.x, position.y, 0), Quaternion.identity);
+        return createNewEnemy(new Vector2(x, y), new Vector2(width, height), new Vector2(targetX, targetY), moveSpeed, prefabName);
+    }
+    public static DefaultEnemy createNewEnemy(Vector2 position, Vector2 size, Vector2 direction, float moveSpeed, string prefabName)
+    {
+        var gameobject = Instantiate((GameObject)Resources.Load(prefabName), new Vector3(position.x, position.y, 0), Quaternion.identity);
         gameobject.transform.localScale = new Vector3(size.x, size.y, 1);
         var enemy = gameobject.GetComponent<DefaultEnemy>();
         enemy.m_rigidbody.velocity = direction.normalized;
@@ -56,6 +72,11 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
     }

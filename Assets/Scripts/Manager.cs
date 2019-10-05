@@ -6,6 +6,8 @@ public class Manager : MonoBehaviour
 {
     public static Manager instance = null;
 
+    private GameObject m_leftBounds, m_rightBounds, m_topBounds, m_botBounds;
+
     private void Awake()
     {
         instance = this;
@@ -16,18 +18,14 @@ public class Manager : MonoBehaviour
     {
         var cameraMinPos = DefaultCamera.instance.getMinPos();
         var cameraMaxPos = DefaultCamera.instance.getMaxPos();
+        createBounds(ref m_leftBounds, cameraMinPos.x, 0, 1, cameraMaxPos.y * 2);
+        createBounds(ref m_rightBounds, cameraMaxPos.x, 0, 1, cameraMaxPos.y * 2);
+        createBounds(ref m_topBounds, 0, cameraMinPos.y, cameraMaxPos.x * 2, 1);
+        createBounds(ref m_botBounds, 0, cameraMaxPos.y, cameraMaxPos.x * 2, 1);
 
-        for(int i = 0;i<50;++i)
+        for (int i = 0;i<50;++i)
         {
-            float width = Random.Range(0.5f, 2f);
-            float height = Random.Range(0.5f, 2f);
-            float x = Random.Range(cameraMinPos.x + width, cameraMaxPos.x - width);
-            float y = Random.Range(cameraMinPos.y + height, cameraMaxPos.y - height);
-            float speed = Random.Range(0.5f, 5f);
-            float targetX = Random.Range(-2, 2);
-            float targetY = Random.Range(-2, 2);
-
-            DefaultEnemy.createNewEnemy(x, y, width, height, targetX, targetY, speed);
+            DefaultEnemy.createRandomEnemy();
         }
     }
 
@@ -36,4 +34,12 @@ public class Manager : MonoBehaviour
     {
         
     }
+
+    private void createBounds(ref GameObject direction, float x, float y, float width, float height)
+    {
+        var gameobject = Instantiate((GameObject)Resources.Load("Bounds"), new Vector3(x, y, 0), Quaternion.identity);
+        gameobject.transform.localScale = new Vector3(width, height, 1);
+        direction = gameobject;
+    }
+
 }
