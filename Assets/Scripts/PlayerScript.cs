@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private SpriteRenderer renderer;
 
+    [SerializeField]
+    private float seconds = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,8 +58,14 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        seconds += Time.deltaTime;
         ProceedMovement();
         ProceedRotation();
+
+        if(Input.GetMouseButton(1) == true)
+        {
+            Dead();
+        }
 
         if(Input.GetMouseButton(0) == true)
         {
@@ -104,5 +114,11 @@ public class PlayerScript : MonoBehaviour
         {
             rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * boostFaktor * Time.fixedDeltaTime);
         }
+    }
+
+    public void Dead()
+    {
+        DontDestroyOnLoadClass.SecondsAlive = (int)seconds;
+        SceneManager.LoadScene(sceneName: "endscreen");
     }
 }

@@ -36,6 +36,7 @@ public class BoundsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(Input.GetKey(KeyCode.UpArrow))
         {
             changeBoundSize(1);
@@ -79,5 +80,6 @@ public class BoundsManager : MonoBehaviour
         m_topBounds.transform.localScale = new Vector3(m_topBounds.transform.localScale.x, m_currentBoundsHeight, 1);
         m_botBounds.transform.localScale = new Vector3(m_botBounds.transform.localScale.x, m_currentBoundsHeight, 1);
     }
+
 
 }

@@ -9,6 +9,7 @@ TagManager:
   - bounds
   - Cloud
   - Mars
+  - Info
   layers:
   - Default
   - TransparentFX
