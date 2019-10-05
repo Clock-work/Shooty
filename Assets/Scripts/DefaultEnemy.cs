@@ -50,6 +50,8 @@ public class DefaultEnemy : MonoBehaviour
         }
         m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_collider = this.GetComponent<CircleCollider2D>();
+        m_rigidbody.isKinematic = false;
+        m_rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
     // Start is called before the first frame update

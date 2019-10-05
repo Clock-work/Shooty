@@ -22,12 +22,21 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private Shoot shootscript;
 
+    [SerializeField]
+    public Sprite[] sprites;
+
+    [SerializeField]
+    private SpriteRenderer renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         shootscript = this.gameObject.GetComponent<Shoot>();
+        rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+        rigidbody.isKinematic = false;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        renderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -39,6 +48,25 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetMouseButton(0) == true)
         {
             shootscript.ShotProjectile();
+            if(movement == Vector2.zero)
+            {
+                renderer.sprite = sprites[3];
+            }
+            else
+            {
+                renderer.sprite = sprites[4];
+            }
+        }
+        else
+        {
+            if (movement == Vector2.zero)
+            {
+                renderer.sprite = sprites[0];
+            }
+            else
+            {
+                renderer.sprite = sprites[1];
+            }
         }
     }
 

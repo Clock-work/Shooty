@@ -7,7 +7,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float Time = 30f;
 
-    public Rigidbody2D rb;
+    [SerializeField]
+    private Rigidbody2D rb;
 
     [SerializeField]
     private float movementSpeed = 10f;
@@ -16,14 +17,19 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         Object.Destroy(transform.gameObject, Time);
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         this.transform.Translate(Vector3.up * movementSpeed);
-        Debug.Log("fly");
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("Hit: " + col.transform.name);
     }
 }
