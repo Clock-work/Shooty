@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3602315308057263224}
   - component: {fileID: 3602315308057263227}
-  - component: {fileID: 3602315308057263228}
   - component: {fileID: 3602315308057263226}
   - component: {fileID: 3602315308057263229}
+  - component: {fileID: -4547223578903914531}
   m_Layer: 0
   m_Name: DefaultEnemy
   m_TagString: enemy
@@ -83,22 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3602315308057263228
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3602315308057263231}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: a3184233b3506b44ea55fbe7002cdfe2, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.01244277}
-  serializedVersion: 2
-  m_Radius: 0.5114428
 --- !u!50 &3602315308057263226
 Rigidbody2D:
   serializedVersion: 4
@@ -132,3 +116,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6fe50518b96842946f9b016e357bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &-4547223578903914531
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3602315308057263231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a3184233b3506b44ea55fbe7002cdfe2, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.15625, y: 0.5}
+      - {x: -0.5, y: -0.15625}
+      - {x: -0.5, y: -0.40625}
+      - {x: 0.5, y: -0.40625}
+      - {x: 0.5, y: -0.15625}
+      - {x: 0.125, y: 0.5}
