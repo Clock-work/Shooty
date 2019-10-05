@@ -16,10 +16,14 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private Vector2 mousePosition = new Vector2(0, 0);
 
+    [SerializeField]
+    private Shoot shootscript;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+        shootscript = this.gameObject.GetComponent<Shoot>();
     }
 
     // Update is called once per frame
@@ -27,6 +31,11 @@ public class PlayerScript : MonoBehaviour
     {
         ProceedMovement();
         ProceedRotation();
+
+        if(Input.GetKey(KeyCode.Space) == true)
+        {
+            shootscript.ShotProjectile();
+        }
     }
 
     public void ProceedRotation()

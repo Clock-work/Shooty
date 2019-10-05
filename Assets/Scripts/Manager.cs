@@ -23,7 +23,7 @@ public class Manager : MonoBehaviour
         createBounds(ref m_topBounds, 0, cameraMinPos.y, cameraMaxPos.x * 2, 1);
         createBounds(ref m_botBounds, 0, cameraMaxPos.y, cameraMaxPos.x * 2, 1);
 
-        for (int i = 0;i<50;++i)
+        for (int i = 0;i<10;++i)
         {
             DefaultEnemy.createRandomEnemy();
         }

@@ -15,8 +15,10 @@ public class DefaultEnemy : MonoBehaviour
         var cameraMinPos = DefaultCamera.instance.getMinPos();
         var cameraMaxPos = DefaultCamera.instance.getMaxPos();
 
-        float width = Random.Range(0.5f, 2f);
-        float height = Random.Range(0.5f, 2f);
+        float scale = Random.Range(3f, 5f);
+
+        float width = scale;
+        float height = scale;
         float x = Random.Range(cameraMinPos.x + width, cameraMaxPos.x - width);
         float y = Random.Range(cameraMinPos.y + height, cameraMaxPos.y - height);
         float speed = Random.Range(0.5f, 5f);
