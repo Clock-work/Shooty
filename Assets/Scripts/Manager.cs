@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
+    public static Manager instance = null;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 1;i<6;++i)
+        var cameraMinPos = DefaultCamera.instance.getMinPos();
+        var cameraMaxPos = DefaultCamera.instance.getMaxPos();
+
+        for(int i = 0;i<50;++i)
         {
-            DefaultEnemy.createNewEnemy(0, 0, 1, 1, i, i * 2, 1);
+            float width = Random.Range(0.5f, 2f);
+            float height = Random.Range(0.5f, 2f);
+            float x = Random.Range(cameraMinPos.x + width, cameraMaxPos.x - width);
+            float y = Random.Range(cameraMinPos.y + height, cameraMaxPos.y - height);
+            float speed = Random.Range(0.5f, 5f);
+            float targetX = Random.Range(-2, 2);
+            float targetY = Random.Range(-2, 2);
+
+            DefaultEnemy.createNewEnemy(x, y, width, height, targetX, targetY, speed);
         }
     }
 

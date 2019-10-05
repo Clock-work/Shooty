@@ -2,18 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultCameraScript : MonoBehaviour
+public class DefaultCamera : MonoBehaviour
 {
+    public static DefaultCamera instance = null;
+    private Camera m_camera;
 
-    public static Bounds OrthographicBounds(this Camera camera)
+    public Vector2 getMinPos()
     {
-        float screenAspect = (float)Screen.width / (float)Screen.height;
-        float cameraHeight = camera.orthographicSize * 2;
-        Bounds bounds = new Bounds(
-            camera.transform.position,
-            new Vector3(cameraHeight * screenAspect, cameraHeight, 0));
-        return bounds;
+        return m_camera.ScreenToWorldPoint(new Vector2(0, 0));
     }
+
+    public Vector2 getMaxPos()
+    {
+        return m_camera.ScreenToWorldPoint(new Vector2(m_camera.pixelWidth, m_camera.pixelHeight));
+    }
+
+    private void Awake()
+    {
+        instance = this;
+        this.m_camera = this.GetComponent<Camera>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

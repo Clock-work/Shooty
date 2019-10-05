@@ -7,7 +7,6 @@ public class DefaultEnemy : MonoBehaviour
     public static List<DefaultEnemy> enemies = new List<DefaultEnemy>();
 
     private float m_moveSpeed;
-    private Vector2 m_direction;
     private Rigidbody2D m_rigidbody;
     private BoxCollider2D m_collider;
 
@@ -20,7 +19,7 @@ public class DefaultEnemy : MonoBehaviour
         var gameobject = Instantiate((GameObject)Resources.Load("DefaultEnemy"), new Vector3(position.x, position.y, 0), Quaternion.identity);
         gameobject.transform.localScale = new Vector3(size.x, size.y, 1);
         var enemy = gameobject.GetComponent<DefaultEnemy>();
-        enemy.m_direction = direction;
+        enemy.m_rigidbody.velocity = direction.normalized;
         enemy.m_moveSpeed = moveSpeed;
         return enemy;
     }
@@ -58,14 +57,10 @@ public class DefaultEnemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        updatePosition();
+
     }
 
 
-    private void updatePosition()
-    {
-        m_rigidbody.MovePosition(m_rigidbody.position + m_direction * m_moveSpeed * Time.deltaTime);
-    }
 
 
 }
