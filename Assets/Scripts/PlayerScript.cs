@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+
+    enum ANIMATIONSTATE
+    {
+        IDLE = 0,
+        MOVE_01 = 1,
+        MOVE_02 = 2,
+        IDLE_SHOOT_01 = 3,
+        IDLE_SHOOT_02 = 4,
+        MOVE_SHOOT_01 = 5,
+        MOVE_SHOOT_02 = 6
+    };
+
     [SerializeField]
     public float movementSpeed = 1.0f;
 
@@ -50,11 +62,13 @@ public class PlayerScript : MonoBehaviour
             shootscript.ShotProjectile();
             if(movement == Vector2.zero)
             {
-                renderer.sprite = sprites[3];
+                int random = Random.Range(0, 2);
+                renderer.sprite = sprites[(int)ANIMATIONSTATE.IDLE_SHOOT_01 + random];
             }
             else
             {
-                renderer.sprite = sprites[4];
+                int random = Random.Range(0, 2);
+                renderer.sprite = sprites[(int)ANIMATIONSTATE.MOVE_SHOOT_01 + random];
             }
         }
         else
@@ -65,7 +79,9 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                renderer.sprite = sprites[1];
+                int random = Random.Range(0, 2);
+                Debug.Log(random);
+                renderer.sprite = sprites[(int)ANIMATIONSTATE.MOVE_01 + random];
             }
         }
     }
