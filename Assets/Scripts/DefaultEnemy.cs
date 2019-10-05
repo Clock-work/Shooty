@@ -8,7 +8,7 @@ public class DefaultEnemy : MonoBehaviour
 
     private float m_moveSpeed;
     private Rigidbody2D m_rigidbody;
-    private BoxCollider2D m_collider;
+    private CircleCollider2D m_collider;
 
     public static DefaultEnemy createRandomEnemy()
     {
@@ -49,7 +49,7 @@ public class DefaultEnemy : MonoBehaviour
             enemies.Add(this);
         }
         m_rigidbody = this.GetComponent<Rigidbody2D>();
-        m_collider = this.GetComponent<BoxCollider2D>();
+        m_collider = this.GetComponent<CircleCollider2D>();
     }
 
     // Start is called before the first frame update

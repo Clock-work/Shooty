@@ -8,16 +8,20 @@ public class PlayerScript : MonoBehaviour
     public float movementSpeed = 1.0f;
 
     [SerializeField]
+    public float boostFaktor = 2.0f;
+
+    [SerializeField]
     public Rigidbody2D rigidbody;
 
     [SerializeField]
-    private Vector2 movement = new Vector3(0, 0);
+    private Vector2 movement = new Vector2(0, 0);
 
     [SerializeField]
     private Vector2 mousePosition = new Vector2(0, 0);
 
     [SerializeField]
     private Shoot shootscript;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +36,7 @@ public class PlayerScript : MonoBehaviour
         ProceedMovement();
         ProceedRotation();
 
-        if(Input.GetKey(KeyCode.Space) == true)
+        if(Input.GetMouseButton(0) == true)
         {
             shootscript.ShotProjectile();
         }
@@ -49,6 +53,13 @@ public class PlayerScript : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal") * movementSpeed;
         movement.y = Input.GetAxis("Vertical") * movementSpeed;
 
-        rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * Time.fixedDeltaTime);
+        if (Input.GetKey(KeyCode.Space) == false)
+        {
+            rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * boostFaktor * Time.fixedDeltaTime);
+        }
     }
 }
