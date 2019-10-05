@@ -9,8 +9,8 @@ public class DefaultEnemy : MonoBehaviour
     private float m_moveSpeed;
     private Rigidbody2D m_rigidbody;
     private CircleCollider2D m_collider;
-    private int m_health;
-    private int m_maxHealth;
+    private int m_health = 1;
+    private int m_maxHealth = 1;
     private float m_rotationSpeed;
     private float m_startDegrees;
 
@@ -43,7 +43,7 @@ public class DefaultEnemy : MonoBehaviour
         }
         float startDegrees = Random.Range(0.0f, 360.0f);
 
-        return createNewEnemy(x, y, width, height, targetX, targetY, speed, rotationSpeed, startDegrees, "Prefabs/DefaultEnemy");
+        return createNewEnemy(x, y, width, height, targetX, targetY, speed, rotationSpeed, startDegrees, "Prefabs/Enemies/ShootingEnemy");
     }
 
     public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed, float rotationSpeed, float startDegrees, string prefabName)
