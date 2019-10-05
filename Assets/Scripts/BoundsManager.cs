@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class BoundsManager : MonoBehaviour
 {
-    public static Manager instance = null;
+    public static BoundsManager instance = null;
 
     private GameObject m_leftBounds, m_rightBounds, m_topBounds, m_botBounds;
 
     private float m_minBoundsSize;
     private float m_maxBoundsSize;
-    private float m_currentBoundsSize;
+    private float m_currentBoundsWidth;
+    private float m_currentBoundsHeight;
 
     private void Awake()
     {
@@ -24,16 +25,12 @@ public class Manager : MonoBehaviour
         var cameraMaxPos = DefaultCamera.instance.getMaxPos();
         m_minBoundsSize = 6;
         m_maxBoundsSize = 40;
-        m_currentBoundsSize = m_minBoundsSize;
+        m_currentBoundsWidth = m_minBoundsSize;
+        m_currentBoundsHeight = m_minBoundsSize;
         createBounds(ref m_leftBounds, cameraMinPos.x -2, 0, m_minBoundsSize, cameraMaxPos.y * 2);
         createBounds(ref m_rightBounds, cameraMaxPos.x +2, 0, m_minBoundsSize, cameraMaxPos.y * 2);
         createBounds(ref m_topBounds, 0, cameraMinPos.y -2, cameraMaxPos.x * 2, m_minBoundsSize);
         createBounds(ref m_botBounds, 0, cameraMaxPos.y +2, cameraMaxPos.x * 2, m_minBoundsSize);
-
-        for (int i = 0;i<20;++i)
-        {
-            DefaultEnemy.createRandomEnemy();
-        }
     }
 
     // Update is called once per frame
@@ -59,19 +56,28 @@ public class Manager : MonoBehaviour
     //negative to decrease size for the bounds
     public void changeBoundSize(float addedSize)
     {
-        m_currentBoundsSize += addedSize;
-        if(m_currentBoundsSize<m_minBoundsSize)
+        m_currentBoundsWidth += addedSize *1.8f;
+        m_currentBoundsHeight += addedSize;
+        if (m_currentBoundsWidth < m_minBoundsSize)
         {
-            m_currentBoundsSize = m_minBoundsSize;
+            m_currentBoundsWidth = m_minBoundsSize;
         }
-        if(m_currentBoundsSize>m_maxBoundsSize)
+        if(m_currentBoundsWidth > m_maxBoundsSize * 1.8f)
         {
-            m_currentBoundsSize = m_maxBoundsSize;
+            m_currentBoundsWidth = m_maxBoundsSize * 1.8f;
         }
-        m_leftBounds.transform.localScale = new Vector3(m_currentBoundsSize, m_leftBounds.transform.localScale.y, 1);
-        m_rightBounds.transform.localScale = new Vector3(m_currentBoundsSize, m_rightBounds.transform.localScale.y, 1);
-        m_topBounds.transform.localScale = new Vector3(m_topBounds.transform.localScale.x, m_currentBoundsSize, 1);
-        m_botBounds.transform.localScale = new Vector3(m_botBounds.transform.localScale.x, m_currentBoundsSize, 1);
+        if (m_currentBoundsHeight < m_minBoundsSize)
+        {
+            m_currentBoundsHeight = m_minBoundsSize;
+        }
+        if (m_currentBoundsHeight > m_maxBoundsSize)
+        {
+            m_currentBoundsHeight = m_maxBoundsSize;
+        }
+        m_leftBounds.transform.localScale = new Vector3(m_currentBoundsWidth, m_leftBounds.transform.localScale.y, 1);
+        m_rightBounds.transform.localScale = new Vector3(m_currentBoundsWidth, m_rightBounds.transform.localScale.y, 1);
+        m_topBounds.transform.localScale = new Vector3(m_topBounds.transform.localScale.x, m_currentBoundsHeight, 1);
+        m_botBounds.transform.localScale = new Vector3(m_botBounds.transform.localScale.x, m_currentBoundsHeight, 1);
     }
 
 }
