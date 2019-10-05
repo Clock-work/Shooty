@@ -13,6 +13,16 @@ public class BoundsManager : MonoBehaviour
     private float m_currentBoundsWidth;
     private float m_currentBoundsHeight;
 
+    public static Vector2 getInternalMinPos()
+    {
+        return new Vector2(instance.m_leftBounds.transform.position.x + instance.m_leftBounds.transform.localScale.x/2, instance.m_botBounds.transform.position.y + instance.m_botBounds.transform.localScale.y/2);
+    }
+
+    public static Vector2 getInternalMaxPos()
+    {
+        return new Vector2(instance.m_rightBounds.transform.position.x - instance.m_rightBounds.transform.localScale.x/2, instance.m_topBounds.transform.position.y - instance.m_topBounds.transform.localScale.y/2);
+    }
+
     private void Awake()
     {
         instance = this;
@@ -29,8 +39,8 @@ public class BoundsManager : MonoBehaviour
         m_currentBoundsHeight = m_minBoundsSize;
         createBounds(ref m_leftBounds, cameraMinPos.x -2, 0, m_minBoundsSize, cameraMaxPos.y * 2);
         createBounds(ref m_rightBounds, cameraMaxPos.x +2, 0, m_minBoundsSize, cameraMaxPos.y * 2);
-        createBounds(ref m_topBounds, 0, cameraMinPos.y -2, cameraMaxPos.x * 2, m_minBoundsSize);
-        createBounds(ref m_botBounds, 0, cameraMaxPos.y +2, cameraMaxPos.x * 2, m_minBoundsSize);
+        createBounds(ref m_botBounds, 0, cameraMinPos.y -2, cameraMaxPos.x * 2, m_minBoundsSize);
+        createBounds(ref m_topBounds, 0, cameraMaxPos.y +2, cameraMaxPos.x * 2, m_minBoundsSize);
     }
 
     // Update is called once per frame
@@ -45,6 +55,7 @@ public class BoundsManager : MonoBehaviour
         {
             changeBoundSize(-1);
         }
+
     }
 
     private void createBounds(ref GameObject direction, float x, float y, float width, float height)
