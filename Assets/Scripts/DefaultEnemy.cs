@@ -9,6 +9,8 @@ public class DefaultEnemy : MonoBehaviour
     private float m_moveSpeed;
     private Rigidbody2D m_rigidbody;
     private CircleCollider2D m_collider;
+    private int m_health;
+    private int m_maxHealth;
 
     public static DefaultEnemy createRandomEnemy()
     {
@@ -25,7 +27,7 @@ public class DefaultEnemy : MonoBehaviour
         float targetX = Random.Range(-10f, 10f);
         float targetY = Random.Range(-10f, 10f);
 
-        return createNewEnemy(x, y, width, height, targetX, targetY, speed, "DefaultEnemy");
+        return createNewEnemy(x, y, width, height, targetX, targetY, speed, "prefabs/DefaultEnemy");
     }
 
     public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed, string prefabName)
@@ -39,7 +41,20 @@ public class DefaultEnemy : MonoBehaviour
         var enemy = gameobject.GetComponent<DefaultEnemy>();
         enemy.m_rigidbody.velocity = direction.normalized;
         enemy.m_moveSpeed = moveSpeed;
+        enemy.onInit();
         return enemy;
+    }
+
+    //special values per subclass
+    protected virtual void onInit()
+    {
+        m_maxHealth = 1;
+    }
+
+    //called after enemy is destroyed and removed
+    protected virtual void onDeath()
+    {
+
     }
 
     private void Awake()
@@ -57,7 +72,7 @@ public class DefaultEnemy : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-
+        m_health = m_maxHealth;
     }
 
     private void OnDestroy()
@@ -66,13 +81,16 @@ public class DefaultEnemy : MonoBehaviour
         {
             enemies.Remove(this);
         }
-
+        this.onDeath();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        
+        if(m_health<=0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -82,7 +100,7 @@ public class DefaultEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        Debug.Log("Collision: " + collision.transform.name);
     }
 
 

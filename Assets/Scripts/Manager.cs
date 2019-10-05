@@ -23,7 +23,7 @@ public class Manager : MonoBehaviour
         createBounds(ref m_topBounds, 0, cameraMinPos.y, cameraMaxPos.x * 2, 1);
         createBounds(ref m_botBounds, 0, cameraMaxPos.y, cameraMaxPos.x * 2, 1);
 
-        for (int i = 0;i<10;++i)
+        for (int i = 0;i<20;++i)
         {
             DefaultEnemy.createRandomEnemy();
         }
@@ -37,7 +37,7 @@ public class Manager : MonoBehaviour
 
     private void createBounds(ref GameObject direction, float x, float y, float width, float height)
     {
-        var gameobject = Instantiate((GameObject)Resources.Load("Bounds"), new Vector3(x, y, 0), Quaternion.identity);
+        var gameobject = Instantiate((GameObject)Resources.Load("prefabs/Bounds"), new Vector3(x, y, 0), Quaternion.identity);
         gameobject.transform.localScale = new Vector3(width, height, 1);
         direction = gameobject;
     }
