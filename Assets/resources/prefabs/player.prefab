@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1792135064156544301}
   - component: {fileID: 1792135064156537553}
   m_Layer: 0
-  m_Name: player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d0f811e8b11f2c04b9855f3cea18175e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 666fc1767c284b0449d67ffd7105a378, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +103,15 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   mousePosition: {x: 0, y: 0}
   shootscript: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: 666fc1767c284b0449d67ffd7105a378, type: 3}
+  - {fileID: 21300000, guid: fd10ae065b5c5484c8c7a0cb4445e6fd, type: 3}
+  - {fileID: 21300000, guid: b68ec51d55751544981331e5dc0d8ff1, type: 3}
+  - {fileID: 21300000, guid: 81afd9fd971705541abb476504c0d65f, type: 3}
+  - {fileID: 21300000, guid: 51f372fda12e21f4da841c4376c1571d, type: 3}
+  - {fileID: 21300000, guid: 160fca2a5016f164396d8497307124ce, type: 3}
+  - {fileID: 21300000, guid: 11500b4e72e931f45857d028c2329499, type: 3}
+  renderer: {fileID: 0}
 --- !u!50 &1792135064156544298
 Rigidbody2D:
   serializedVersion: 4
@@ -136,7 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6842f7bcc5fc9547ae382cb6b8db6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 7462481629626092604, guid: 3ab0a7f99926d74449f7c0893960c38d,
+    type: 3}
   cooldown: 1
   time: 0
 --- !u!60 &1792135064156544301
@@ -156,7 +166,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.7567568, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

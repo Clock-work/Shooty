@@ -27,7 +27,7 @@ public class DefaultEnemy : MonoBehaviour
         float targetX = Random.Range(-10f, 10f);
         float targetY = Random.Range(-10f, 10f);
 
-        return createNewEnemy(x, y, width, height, targetX, targetY, speed, "prefabs/DefaultEnemy");
+        return createNewEnemy(x, y, width, height, targetX, targetY, speed, "Prefabs/DefaultEnemy");
     }
 
     public static DefaultEnemy createNewEnemy(float x, float y, float width, float height, float targetX, float targetY, float moveSpeed, string prefabName)
@@ -36,7 +36,7 @@ public class DefaultEnemy : MonoBehaviour
     }
     public static DefaultEnemy createNewEnemy(Vector2 position, Vector2 size, Vector2 direction, float moveSpeed, string prefabName)
     {
-        var gameobject = Instantiate((GameObject)Resources.Load(prefabName), new Vector3(position.x, position.y, 0), Quaternion.identity);
+        var gameobject = Instantiate((GameObject)Resources.Load(prefabName), new Vector3(position.x, position.y, -1), Quaternion.identity);
         gameobject.transform.localScale = new Vector3(size.x, size.y, 1);
         var enemy = gameobject.GetComponent<DefaultEnemy>();
         enemy.m_rigidbody.velocity = direction.normalized;
