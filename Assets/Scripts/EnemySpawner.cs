@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         instance = this;
-        for (int i = 0; i < 20; ++i)
+        for (int i = 0; i < 1; ++i)
         {
             DefaultEnemy.createRandomEnemy();
         }
@@ -19,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.K))
+        {
+            DefaultEnemy.createRandomEnemy();
+        }
     }
 }
