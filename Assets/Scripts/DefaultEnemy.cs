@@ -6,6 +6,18 @@ public class DefaultEnemy : MonoBehaviour
 {
     public static List<DefaultEnemy> enemies = new List<DefaultEnemy>();
 
+    [SerializeField]
+    public Sprite[] sprites;
+
+    [SerializeField]
+    public SpriteRenderer renderer;
+
+    private int indicie = 0;
+    public float time = 0;
+
+    [SerializeField]
+    public float AnimationInterval = 2f;
+
     protected Rigidbody2D m_rigidbody;
     protected Collider2D m_collider;
     protected int m_health = 1;
@@ -16,6 +28,16 @@ public class DefaultEnemy : MonoBehaviour
     protected int m_directDamage = 1;
 
     private const int maxNumberOfSpawnTries = 10;
+
+    public void Animate()
+    {
+        if(time > AnimationInterval)
+        {
+            indicie++;
+            renderer.sprite = sprites[indicie % 3];
+            time = 0;
+        }
+    }
 
     //returns false if no free position was found
     public static bool findNewFreePosition(float width, float height, out Vector2 position)
@@ -135,6 +157,7 @@ public class DefaultEnemy : MonoBehaviour
         m_collider = this.GetComponent<Collider2D>();
         m_rigidbody.isKinematic = false;
         m_rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        renderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -155,6 +178,9 @@ public class DefaultEnemy : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
+        Animate();
+        time += Time.deltaTime;
+
         if(m_health<=0)
         {
             Destroy(this.gameObject);

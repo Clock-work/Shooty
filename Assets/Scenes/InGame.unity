@@ -2602,5 +2602,10 @@ PrefabInstance:
       propertyPath: Health
       value: 
       objectReference: {fileID: 2918958}
+    - target: {fileID: 1792135064156544300, guid: 3a58491476aad5249b1ddb1348ae1ea7,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a58491476aad5249b1ddb1348ae1ea7, type: 3}

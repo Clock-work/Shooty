@@ -155,3 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6fe50518b96842946f9b016e357bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 5736bac12f4a15344b9514a877f002d3, type: 3}
+  - {fileID: 21300000, guid: 58986b2beedd67441b4cec9733a20194, type: 3}
+  - {fileID: 21300000, guid: 4cffc3071c0481b4b84022e973bc6583, type: 3}
+  renderer: {fileID: 0}
+  time: 0
+  AnimationInterval: 1
