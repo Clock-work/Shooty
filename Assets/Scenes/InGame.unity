@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726896936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726896936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -2252,6 +2252,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 1792135064156544300, guid: 3a58491476aad5249b1ddb1348ae1ea7,
+        type: 3}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 2918958}
+    - target: {fileID: 1792135064156544300, guid: 3a58491476aad5249b1ddb1348ae1ea7,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5964947896431758119, guid: 3a58491476aad5249b1ddb1348ae1ea7,
         type: 3}
       propertyPath: m_Name
@@ -2596,16 +2606,6 @@ PrefabInstance:
         type: 3}
       propertyPath: cooldown
       value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1792135064156544300, guid: 3a58491476aad5249b1ddb1348ae1ea7,
-        type: 3}
-      propertyPath: Health
-      value: 
-      objectReference: {fileID: 2918958}
-    - target: {fileID: 1792135064156544300, guid: 3a58491476aad5249b1ddb1348ae1ea7,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a58491476aad5249b1ddb1348ae1ea7, type: 3}
