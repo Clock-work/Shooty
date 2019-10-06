@@ -122,7 +122,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 87437c93d44c90d43a87aabbd69e62f7, type: 3}
   renderer: {fileID: 0}
   time: 0
-  AnimationInterval: 1
+  AnimationInterval: 0.5
 --- !u!58 &-4862385106432622807
 CircleCollider2D:
   m_ObjectHideFlags: 0
