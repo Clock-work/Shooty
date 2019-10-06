@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-
     enum ANIMATIONSTATE
     {
         IDLE = 0,
@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
         MOVE_SHOOT_01 = 5,
         MOVE_SHOOT_02 = 6
     };
+
+    [SerializeField]
+    public Text Health;
 
     [SerializeField]
     public float movementSpeed = 1.0f;
@@ -84,6 +87,8 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Health.text = m_health.ToString();
+
         seconds += Time.deltaTime;
         ProceedMovement();
         ProceedRotation();
