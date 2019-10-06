@@ -42,6 +42,9 @@ public class PlayerScript : MonoBehaviour
     private SpriteRenderer renderer;
 
     [SerializeField]
+    public UpdateScript update;
+
+    [SerializeField]
     private float seconds = 0;
 
     public static PlayerScript instance;
@@ -60,13 +63,22 @@ public class PlayerScript : MonoBehaviour
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
         shootscript = this.gameObject.GetComponent<Shoot>();
         renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        update = this.gameObject.GetComponent<UpdateScript>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        movementSpeed = update.movementSpeed;
+        shootscript.time = update.fireRate;
         m_maxHealth = 3;
         m_health = m_maxHealth;
+    }
+
+    public void ReloadStats(float movementSpeed, float fireRate)
+    {
+        this.movementSpeed = movementSpeed;
+        this.shootscript.cooldown = fireRate;
     }
 
     // Update is called once per frame

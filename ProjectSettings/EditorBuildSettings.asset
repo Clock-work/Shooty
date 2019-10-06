@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InGame.unity
     guid: 2a7fbb9fff6de234cacc9fccf1427749
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/endscreen.unity
     guid: 188a88444ef2c18438401d09e50ff9a5
+  - enabled: 0
+    path: Assets/Scenes/Upgrade.unity
+    guid: 0bc6d733f2ae45d4d874ae9a56bbb95b
   m_configObjects: {}
