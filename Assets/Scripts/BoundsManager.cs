@@ -34,7 +34,7 @@ public class BoundsManager : MonoBehaviour
         var cameraMinPos = DefaultCamera.instance.getMinPos();
         var cameraMaxPos = DefaultCamera.instance.getMaxPos();
         m_minBoundsSize = 6;
-        m_maxBoundsSize = 40;
+        m_maxBoundsSize = 50;
         m_currentBoundsWidth = m_minBoundsSize;
         m_currentBoundsHeight = m_minBoundsSize;
         createBounds(ref m_leftBounds, cameraMinPos.x -2, 0, m_minBoundsSize, cameraMaxPos.y * 2);
@@ -60,7 +60,7 @@ public class BoundsManager : MonoBehaviour
 
     private void createBounds(ref GameObject direction, float x, float y, float width, float height)
     {
-        var gameobject = Instantiate((GameObject)Resources.Load("Prefabs/Bounds"), new Vector3(x, y, 0), Quaternion.identity);
+        var gameobject = Instantiate((GameObject)Resources.Load("Prefabs/Map/Bounds"), new Vector3(x, y, 0), Quaternion.identity);
         gameobject.transform.localScale = new Vector3(width, height, 1);
         direction = gameobject;
     }

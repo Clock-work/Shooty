@@ -6,12 +6,14 @@ public class DefaultEnemy : MonoBehaviour
 {
     public static List<DefaultEnemy> enemies = new List<DefaultEnemy>();
 
-    private Rigidbody2D m_rigidbody;
-    private Collider2D m_collider;
-    private int m_health = 1;
-    private int m_maxHealth = 1;
-    private float m_rotationSpeed;
-    private float m_startDegrees;
+    protected Rigidbody2D m_rigidbody;
+    protected Collider2D m_collider;
+    protected int m_health = 1;
+    protected int m_maxHealth = 1;
+    protected float m_rotationSpeed;
+    protected float m_startDegrees;
+    //maybe change for bosses
+    protected int m_directDamage = 1;
 
     private const int maxNumberOfSpawnTries = 10;
 
@@ -114,6 +116,15 @@ public class DefaultEnemy : MonoBehaviour
         return m_collider.bounds.Intersects(bounds);
     }
 
+    public void attackMe(int damage)
+    {
+        m_health -= damage;
+        if (m_health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void Awake()
     {
         if (!enemies.Contains(this))
@@ -156,9 +167,15 @@ public class DefaultEnemy : MonoBehaviour
 
     }
 
+    //always call this in subclass if the method has to be overriden again
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        if(collision.gameObject.tag.Equals("player"))
+        {
+            var player = collision.gameObject.GetComponent<PlayerScript>();
+            player.attackMe(m_directDamage);
+            Destroy(this.gameObject);
+        }
     }
 
 

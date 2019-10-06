@@ -10,6 +10,8 @@ TagManager:
   - Cloud
   - Mars
   - Info
+  - player
+  - projectile
   layers:
   - Default
   - TransparentFX

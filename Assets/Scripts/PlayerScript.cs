@@ -48,23 +48,25 @@ public class PlayerScript : MonoBehaviour
 
     private Collider2D m_collider;
 
-    private const float playerSafeAreaRadius = 50;
+    private const float playerSafeAreaRadius = 15;
+
+    private int m_health;
+    private int m_maxHealth;
 
     private void Awake()
     {
         instance = this;
         m_collider = this.gameObject.GetComponent<Collider2D>();
+        rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+        shootscript = this.gameObject.GetComponent<Shoot>();
+        renderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
-        shootscript = this.gameObject.GetComponent<Shoot>();
-        rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
-        rigidbody.isKinematic = false;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        renderer = this.gameObject.GetComponent<SpriteRenderer>();
+        m_maxHealth = 3;
+        m_health = m_maxHealth;
     }
 
     // Update is called once per frame
@@ -73,11 +75,6 @@ public class PlayerScript : MonoBehaviour
         seconds += Time.deltaTime;
         ProceedMovement();
         ProceedRotation();
-
-        if(Input.GetMouseButton(1) == true)
-        {
-            Dead();
-        }
 
         if(Input.GetMouseButton(0) == true)
         {
@@ -142,6 +139,15 @@ public class PlayerScript : MonoBehaviour
         size.z = 1;
         Bounds biggerPlayerBounds = new Bounds(m_collider.bounds.center, size);
         return biggerPlayerBounds.Intersects(bounds);
+    }
+
+    public void attackMe(int damage)
+    {
+        m_health -= damage;
+        if(m_health<=0)
+        {
+            Dead();
+        }
     }
 
 }

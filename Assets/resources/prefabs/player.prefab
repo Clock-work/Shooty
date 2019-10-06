@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5853208551270463948}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 160fca2a5016f164396d8497307124ce, type: 3}
   - {fileID: 21300000, guid: 11500b4e72e931f45857d028c2329499, type: 3}
   renderer: {fileID: 0}
+  seconds: 0
 --- !u!50 &1792135064156544298
 Rigidbody2D:
   serializedVersion: 4
