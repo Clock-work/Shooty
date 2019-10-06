@@ -36,9 +36,6 @@ public class PlayerScript : MonoBehaviour
     private Vector2 mousePosition = new Vector2(0, 0);
 
     [SerializeField]
-    private Shoot shootscript;
-
-    [SerializeField]
     public Sprite[] sprites;
 
     [SerializeField]
@@ -50,30 +47,37 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float seconds = 0;
 
+
     public static PlayerScript instance;
 
     private Collider2D m_collider;
 
     private const float playerSafeAreaRadius = 15;
 
+    private AudioSource m_shootSound;
+
+
     private int m_health;
     private int m_maxHealth;
+
+    private float m_shootCooldown;
+    private float m_time = 0;
 
     private void Awake()
     {
         instance = this;
         m_collider = this.gameObject.GetComponent<Collider2D>();
         rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
-        shootscript = this.gameObject.GetComponent<Shoot>();
         renderer = this.gameObject.GetComponent<SpriteRenderer>();
         update = this.gameObject.GetComponent<UpdateScript>();
+        m_shootSound = this.gameObject.GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         movementSpeed = update.movementSpeed;
-        shootscript.time = update.fireRate;
+        m_shootCooldown = update.fireRate;
         m_maxHealth = 3;
         m_health = m_maxHealth;
     }
@@ -81,7 +85,7 @@ public class PlayerScript : MonoBehaviour
     public void ReloadStats(float movementSpeed, float fireRate)
     {
         this.movementSpeed = movementSpeed;
-        this.shootscript.cooldown = fireRate;
+        this.m_shootCooldown = fireRate;
     }
 
     // Update is called once per frame
@@ -90,12 +94,10 @@ public class PlayerScript : MonoBehaviour
         Health.text = m_health.ToString();
 
         seconds += Time.deltaTime;
-        ProceedMovement();
-        ProceedRotation();
 
         if(Input.GetMouseButton(0) == true)
         {
-            shootscript.ShotProjectile();
+            shootProjectile();
             if(movement == Vector2.zero)
             {
                 int random = Random.Range(0, 2);
@@ -119,6 +121,15 @@ public class PlayerScript : MonoBehaviour
                 renderer.sprite = sprites[(int)ANIMATIONSTATE.MOVE_01 + random];
             }
         }
+
+        m_time += Time.deltaTime;
+
+    }
+
+    private void FixedUpdate()
+    {
+        ProceedMovement();
+        ProceedRotation();
     }
 
     public void ProceedRotation()
@@ -126,19 +137,36 @@ public class PlayerScript : MonoBehaviour
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        rigidbody.angularVelocity = 0.0f;
     }
 
     public void ProceedMovement() {
-        movement.x = Input.GetAxis("Horizontal") * movementSpeed;
-        movement.y = Input.GetAxis("Vertical") * movementSpeed;
+        movement.x = 0;
+        movement.y = 0;
+        if(Input.GetKey(KeyCode.A))
+        {
+            movement.x -= 1;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            movement.x += 1;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            movement.y += 1;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            movement.y -= 1;
+        }
 
         if (Input.GetKey(KeyCode.Space) == false)
         {
-            rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * Time.fixedDeltaTime);
+            rigidbody.velocity = movement.normalized * movementSpeed;
         }
         else
         {
-            rigidbody.MovePosition(rigidbody.position + movement * movementSpeed * boostFaktor * Time.fixedDeltaTime);
+            rigidbody.velocity = movement.normalized * movementSpeed * boostFaktor;
         }
     }
 
@@ -164,6 +192,18 @@ public class PlayerScript : MonoBehaviour
         if(m_health<=0)
         {
             Dead();
+        }
+    }
+
+    private void shootProjectile()
+    {
+        if (m_time >= m_shootCooldown)
+        {
+            m_shootSound.Play();
+            Vector3 direction = this.transform.up.normalized;
+            var projectilePos = new Vector2(transform.position.x, transform.position.y) + new Vector2(direction.x * transform.localScale.x / 2, direction.y * transform.localScale.y / 2);
+            Projectile.createNewProjectile(projectilePos, new Vector2(1.2f, 1.2f), this.transform.rotation, new Vector2(direction.x, direction.y), 45f, true, 1, 1);
+            m_time = 0;
         }
     }
 

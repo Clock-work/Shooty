@@ -15,19 +15,25 @@ public class UpdateScript : MonoBehaviour
     [SerializeField]
     public Button CooldownShoot;
 
-    [SerializeField]
     public int points = 0;
-    public float movementSpeed = 2.5f;
-    public float fireRate = 0.5f;
+    public float movementSpeed;
+    public float fireRate;
 
     [SerializeField]
     public PlayerScript player;
 
-    void Start()
+    private void Awake()
     {
+        movementSpeed = 5.0f;
+        fireRate = 0.4f;
         points = 10;
         MovementSpeed.onClick.AddListener(IncreaseMovement);
         CooldownShoot.onClick.AddListener(DecreaseCooldown);
+    }
+
+    void Start()
+    {
+
     }
 
     void Update()
