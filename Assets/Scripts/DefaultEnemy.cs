@@ -52,23 +52,23 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     //returns null if there is no space for another enemy | creates a new defaultenemy
-    public static DefaultEnemy createRandomEnemy()
+    public static DefaultEnemy createRandomEnemy(float sizeMin = 3f, float sizeMax = 5f, float speedMin = 2f, float speedMax = 20f, float rotationSpeedMin = -1.3f, float rotationSpeedMax = 1.3f)
     {
-        float widthHeight = Random.Range(3f, 5f);
+        float widthHeight = Random.Range(sizeMin, sizeMax);
 
-        if(!findNewFreePosition(widthHeight, widthHeight, out Vector2 position))
+        if (!findNewFreePosition(widthHeight, widthHeight, out Vector2 position))
         {
             return null;
         }
 
-        float speed = Random.Range(2f, 20f);
+        float speed = Random.Range(speedMin, speedMax);
         float targetX = Random.Range(-10f, 10f);
         float targetY = Random.Range(-10f, 10f);
 
-        float rotationSpeed = Random.Range(-1.3f, 1.3f);
-        if(rotationSpeed< 0.1f && rotationSpeed > -0.1f)
+        float rotationSpeed = Random.Range(rotationSpeedMin, rotationSpeedMax);
+        if (rotationSpeed < 0.05f && rotationSpeed > -0.05f)
         {
-            if(rotationSpeed>0)
+            if (rotationSpeed > 0)
             {
                 rotationSpeed += 0.1f;
             }
@@ -125,7 +125,7 @@ public class DefaultEnemy : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected void Awake()
     {
         if (!enemies.Contains(this))
         {
@@ -138,12 +138,12 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Start()
+    protected void Start()
     {
         m_health = m_maxHealth;
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         if(enemies.Contains(this))
         {
@@ -153,7 +153,7 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    protected void Update()
     {
         if(m_health<=0)
         {
@@ -162,13 +162,13 @@ public class DefaultEnemy : MonoBehaviour
         this.transform.Rotate(new Vector3(0, 0, 1), m_rotationSpeed);
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
 
     }
 
     //always call this in subclass if the method has to be overriden again
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag.Equals("player"))
         {

@@ -10,9 +10,11 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         instance = this;
-        for (int i = 0; i < 5; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             DefaultEnemy.createRandomEnemy();
+            ShootingEnemy.createRandomEnemy();
+            SeekingEnemy.createRandomEnemy();
         }
     }
 
@@ -22,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
         if(Input.GetKey(KeyCode.K))
         {
             DefaultEnemy.createRandomEnemy();
+            ShootingEnemy.createRandomEnemy();
+            SeekingEnemy.createRandomEnemy();
         }
     }
 }

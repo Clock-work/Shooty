@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2499621848356638289}
   - component: {fileID: 4537473683951191594}
   - component: {fileID: 2499621848356638288}
-  - component: {fileID: 2499621848356638295}
+  - component: {fileID: -4455848318177201320}
   m_Layer: 0
   m_Name: SeekingEnemy
   m_TagString: enemy
@@ -139,7 +139,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2499621848356638295
+--- !u!114 &-4455848318177201320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,6 +148,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2499621848356638293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c6fe50518b96842946f9b016e357bd, type: 3}
+  m_Script: {fileID: 11500000, guid: eaa7f43bd5bbd954fbb6500ea9614fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
