@@ -7,24 +7,46 @@ public class DefaultEnemy : MonoBehaviour
     public static List<DefaultEnemy> enemies = new List<DefaultEnemy>();
 
     private Rigidbody2D m_rigidbody;
-    private CircleCollider2D m_collider;
+    private Collider2D m_collider;
     private int m_health = 1;
     private int m_maxHealth = 1;
     private float m_rotationSpeed;
     private float m_startDegrees;
+
+    private const int maxNumberOfSpawnTries = 10;
 
     //returns false if no free position was found
     public static bool findNewFreePosition(float width, float height, out Vector2 position)
     {
         var minPos = BoundsManager.getInternalMinPos();
         var maxPos = BoundsManager.getInternalMaxPos();
-        float x = Random.Range(minPos.x + width, maxPos.x - width);
-        float y = Random.Range(minPos.y + height, maxPos.y - height);
 
 
+        for(int i = 0;i< maxNumberOfSpawnTries;++i)
+        {
+            float x = Random.Range(minPos.x + width / 2, maxPos.x - width / 2);
+            float y = Random.Range(minPos.y + height / 2, maxPos.y - height / 2);
+            Bounds bounds = new Bounds(new Vector3(x, y, -1), new Vector3(width, height, 1));
+            bool collided = false;
+            foreach(var enemy in enemies)
+            {
+                if(enemy.wouldCollide(bounds))
+                {
+                    collided = true;
+                    break;
+                }
+            }
 
-        position = new Vector2(x, y);
-        return true;
+            if(collided || PlayerScript.instance.wouldCollide(bounds))
+            {
+                continue;
+            }
+
+            position = new Vector2(x, y);
+            return true;
+        }
+        position = new Vector2(0, 0);
+        return false;
     }
 
     //returns null if there is no space for another enemy | creates a new defaultenemy
@@ -86,6 +108,12 @@ public class DefaultEnemy : MonoBehaviour
 
     }
 
+    //checks for potential collision with the point
+    protected virtual bool wouldCollide(Bounds bounds)
+    {
+        return m_collider.bounds.Intersects(bounds);
+    }
+
     private void Awake()
     {
         if (!enemies.Contains(this))
@@ -93,7 +121,7 @@ public class DefaultEnemy : MonoBehaviour
             enemies.Add(this);
         }
         m_rigidbody = this.GetComponent<Rigidbody2D>();
-        m_collider = this.GetComponent<CircleCollider2D>();
+        m_collider = this.GetComponent<Collider2D>();
         m_rigidbody.isKinematic = false;
         m_rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
@@ -130,7 +158,7 @@ public class DefaultEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision: " + collision.transform.name);
+
     }
 
 

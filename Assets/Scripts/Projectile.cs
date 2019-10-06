@@ -30,6 +30,6 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Hit: " + col.transform.name);
+
     }
 }

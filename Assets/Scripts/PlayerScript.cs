@@ -44,6 +44,18 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float seconds = 0;
 
+    public static PlayerScript instance;
+
+    private Collider2D m_collider;
+
+    private const float playerSafeAreaRadius = 50;
+
+    private void Awake()
+    {
+        instance = this;
+        m_collider = this.gameObject.GetComponent<Collider2D>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,4 +133,15 @@ public class PlayerScript : MonoBehaviour
         DontDestroyOnLoadClass.SecondsAlive = (int)seconds;
         SceneManager.LoadScene(sceneName: "endscreen");
     }
+
+    public virtual bool wouldCollide(Bounds bounds)
+    {
+        Vector3 size = m_collider.bounds.size;
+        size.x += playerSafeAreaRadius;
+        size.y += playerSafeAreaRadius;
+        size.z = 1;
+        Bounds biggerPlayerBounds = new Bounds(m_collider.bounds.center, size);
+        return biggerPlayerBounds.Intersects(bounds);
+    }
+
 }
