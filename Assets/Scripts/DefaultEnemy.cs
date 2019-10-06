@@ -29,6 +29,8 @@ public class DefaultEnemy : MonoBehaviour
 
     private const int maxNumberOfSpawnTries = 10;
 
+    protected float m_points;
+
     public void Animate()
     {
         if(time > AnimationInterval)
@@ -124,12 +126,16 @@ public class DefaultEnemy : MonoBehaviour
     protected virtual void onInit()
     {
         m_maxHealth = 1;
+        m_points = 10;
     }
 
     //called after enemy is destroyed and removed
     protected virtual void onDeath()
     {
-
+        if(m_points>0)
+        {
+            PlayerScript.instance.update.points += (int)m_points;
+        }
     }
 
     //checks for potential collision with the point
@@ -147,7 +153,7 @@ public class DefaultEnemy : MonoBehaviour
         }
     }
 
-    protected void Awake()
+    virtual protected void Awake()
     {
         if (!enemies.Contains(this))
         {
@@ -161,7 +167,7 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    protected void Start()
+    virtual protected void Start()
     {
         m_health = m_maxHealth;
     }
@@ -176,7 +182,7 @@ public class DefaultEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected void Update()
+    virtual protected void Update()
     {
         Animate();
         time += Time.deltaTime;
@@ -186,15 +192,18 @@ public class DefaultEnemy : MonoBehaviour
             Destroy(this.gameObject);
         }
         this.transform.Rotate(new Vector3(0, 0, 1), m_rotationSpeed);
+
+        m_points -= 0.3f * m_points  * Time.deltaTime;
+
     }
 
-    protected void FixedUpdate()
+    virtual protected void FixedUpdate()
     {
 
     }
 
     //always call this in subclass if the method has to be overriden again
-    protected void OnCollisionEnter2D(Collision2D collision)
+    virtual protected void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag.Equals("player"))
         {

@@ -46,20 +46,26 @@ public class ShootingEnemy : DefaultEnemy
     private float m_projectileSpeed;
     private int m_projectileDamage;
 
-    protected void Awake()
+    protected override void onInit()
+    {
+        m_maxHealth = 3;
+        m_points = 40;
+    }
+
+    override protected void Awake()
     {
         base.Awake();
     }
 
     // Start is called before the first frame update
-    protected void Start()
+    override protected void Start()
     {
         base.Start();
         m_time = 0;
     }
 
     // Update is called once per frame
-    protected void Update()
+    override protected void Update()
     {
         base.Update();
         m_time += 1 * Time.deltaTime;

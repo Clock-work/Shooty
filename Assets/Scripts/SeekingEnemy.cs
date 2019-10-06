@@ -43,20 +43,26 @@ public class SeekingEnemy : DefaultEnemy
     private float m_speedMin;
     private float m_speedMax;
 
-    protected void Awake()
+    protected override void onInit()
+    {
+        m_maxHealth = 2;
+        m_points = 20;
+    }
+
+    override protected void Awake()
     {
         base.Awake();
     }
 
     // Start is called before the first frame update
-    protected void Start()
+    override protected void Start()
     {
         base.Start();
         m_time = 0;
     }
 
     // Update is called once per frame
-    protected void Update()
+    override protected void Update()
     {
         base.Update();
         m_time += 1 * Time.deltaTime;

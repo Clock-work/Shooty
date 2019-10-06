@@ -154,4 +154,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d88258783112f9c488538e73e602aed9, type: 3}
   renderer: {fileID: 0}
   time: 0
-  AnimationInterval: 0.5
+  AnimationInterval: 0.1

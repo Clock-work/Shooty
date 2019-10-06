@@ -15,7 +15,7 @@ public class UpdateScript : MonoBehaviour
     [SerializeField]
     public Button CooldownShoot;
 
-    public int points = 0;
+    public int points;
     public float movementSpeed;
     public float fireRate;
 
@@ -26,7 +26,7 @@ public class UpdateScript : MonoBehaviour
     {
         movementSpeed = 5.0f;
         fireRate = 0.4f;
-        points = 10;
+        points = 0;
         MovementSpeed.onClick.AddListener(IncreaseMovement);
         CooldownShoot.onClick.AddListener(DecreaseCooldown);
     }
@@ -38,12 +38,11 @@ public class UpdateScript : MonoBehaviour
 
     void Update()
     {
-        pointsShow.text = points.ToString();
+        pointsShow.text = "Points: " + points.ToString();
     }
 
     void IncreaseMovement()
     {
-        Debug.Log("Increase Movement");
         if (points > 0)
         {
             movementSpeed += 1;
@@ -54,7 +53,6 @@ public class UpdateScript : MonoBehaviour
 
     void DecreaseCooldown()
     {
-        Debug.Log("Decrease Cooldown");
         if (points > 0 && fireRate - 0.1f > 0)
         {
             fireRate -= 0.1f;

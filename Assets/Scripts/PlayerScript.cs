@@ -91,11 +91,11 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Health.text = m_health.ToString();
+        Health.text = "HP: " + m_health.ToString();
 
         seconds += Time.deltaTime;
 
-        if(Input.GetMouseButton(0) == true)
+        if(Input.GetKey(KeyCode.Space) == true)
         {
             shootProjectile();
             if(movement == Vector2.zero)
@@ -160,7 +160,7 @@ public class PlayerScript : MonoBehaviour
             movement.y -= 1;
         }
 
-        if (Input.GetKey(KeyCode.Space) == false)
+        if (Input.GetKey(KeyCode.LeftShift) == false)
         {
             rigidbody.velocity = movement.normalized * movementSpeed;
         }
