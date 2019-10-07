@@ -6,6 +6,8 @@ public class DefaultCamera : MonoBehaviour
 {
     public static DefaultCamera instance = null;
     private Camera m_camera;
+    public Texture2D cursorTexture;
+    private Vector2 cursorHotspot;
 
     public Vector2 getMinPos()
     {
@@ -26,13 +28,14 @@ public class DefaultCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cursorHotspot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+        Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.Auto);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
