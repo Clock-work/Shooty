@@ -158,7 +158,7 @@ public class EnemySpawner : MonoBehaviour
                 m_cooldownMax *= 0.85f;
             }
 
-            if (m_projectileSizeMax < 10f)
+            if (m_projectileSizeMax < 8f)
             {
                 m_projectileSizeMin *= 1.15f;
                 m_projectileSizeMax *= 1.15f;
