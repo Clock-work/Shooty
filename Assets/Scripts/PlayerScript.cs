@@ -63,6 +63,9 @@ public class PlayerScript : MonoBehaviour
     private float m_shootCooldown;
     private float m_time = 0;
 
+    private int m_damage;
+    private int m_charges;
+
     private void Awake()
     {
         instance = this;
@@ -76,16 +79,38 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movementSpeed = update.movementSpeed;
-        m_shootCooldown = update.fireRate;
+        movementSpeed = 5.0f;
+        m_shootCooldown = 0.5f;
         m_maxHealth = 3;
         m_health = m_maxHealth;
+        m_damage = 1;
+        m_charges = 1;
     }
 
-    public void ReloadStats(float movementSpeed, float fireRate)
+    public void changeShootCooldown(float multiplier)
     {
-        this.movementSpeed = movementSpeed;
-        this.m_shootCooldown = fireRate;
+        m_shootCooldown *= multiplier;
+    }
+
+    public void changeMovementSpeed(float multiplier)
+    {
+        movementSpeed *= multiplier;
+    }
+
+    public void changeHealth(int added)
+    {
+        m_health += added;
+        m_maxHealth += added;
+    }
+
+    public void changeDamage(int added)
+    {
+        m_damage += added;
+    }
+
+    public void changePierce(int added)
+    {
+        m_charges += added;
     }
 
     // Update is called once per frame
@@ -202,7 +227,7 @@ public class PlayerScript : MonoBehaviour
             m_shootSound.Play();
             Vector3 direction = this.transform.up.normalized;
             var projectilePos = new Vector2(transform.position.x, transform.position.y) + new Vector2(direction.x * transform.localScale.x / 2, direction.y * transform.localScale.y / 2);
-            Projectile.createNewProjectile(projectilePos, new Vector2(1.2f, 1.2f), this.transform.rotation, new Vector2(direction.x, direction.y), 45f, true, 1, 1);
+            Projectile.createNewProjectile(projectilePos, new Vector2(1.2f, 1.2f), this.transform.rotation, new Vector2(direction.x, direction.y), 45f, true, m_damage, m_charges);
             m_time = 0;
         }
     }
