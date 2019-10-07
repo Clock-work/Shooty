@@ -191,6 +191,7 @@ public class DefaultEnemy : MonoBehaviour
 
         if(m_health<=0)
         {
+            this.onDeath();
             Destroy(this.gameObject);
         }
         this.transform.Rotate(new Vector3(0, 0, 1), m_rotationSpeed);
@@ -211,6 +212,7 @@ public class DefaultEnemy : MonoBehaviour
         {
             var player = collision.gameObject.GetComponent<PlayerScript>();
             player.attackMe(m_directDamage);
+            this.onDeath();
             Destroy(this.gameObject);
         }
     }

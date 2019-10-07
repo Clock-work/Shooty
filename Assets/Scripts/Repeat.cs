@@ -18,13 +18,25 @@ public class Repeat : MonoBehaviour
     [SerializeField]
     public Text text;
 
+    [SerializeField]
+    public Text last_try;
+
     // Start is called before the first frame update
     void Start()
     {
         Button btn = button.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
         exit.onClick.AddListener(Quit);
-        text.text = DontDestroyOnLoadClass.SecondsAlive.ToString() + " seconds";
+        if(DontDestroyOnLoadClass.SecondsAlive!=-1)
+        {
+            text.text = DontDestroyOnLoadClass.SecondsAlive.ToString() + " seconds";
+        }
+        else
+        {
+            text.text = "";
+            btn.GetComponentInChildren<Text>().text = "Play";
+            last_try.text = "";
+        }
     }
 
     void TaskOnClick()

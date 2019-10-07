@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DontDestroyOnLoadClass : MonoBehaviour
 {
-    public static int SecondsAlive = 100;
+    public static int SecondsAlive = -1;
     public static DontDestroyOnLoadClass instance;
 
     void Awake()
