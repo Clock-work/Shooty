@@ -37,7 +37,7 @@ public class UpdateScript : MonoBehaviour
     private int m_healthCost = 20;
     private int m_damageCost = 100;
     private int m_pierceCost = 100;
-    private int m_specialCost = 100;
+    private int m_specialCost = 10;
 
     private void Awake()
     {
@@ -124,7 +124,7 @@ public class UpdateScript : MonoBehaviour
         {
             points -= m_specialCost;
             m_specialCost *= 2;
-
+            player.upgradeSpecialAttacks(1.1f);
         }
     }
 

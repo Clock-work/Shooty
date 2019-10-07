@@ -44,9 +44,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     public UpdateScript update;
 
-    [SerializeField]
     private float seconds = 0;
 
+    public Text cooldownText;
 
     public static PlayerScript instance;
 
@@ -65,6 +65,11 @@ public class PlayerScript : MonoBehaviour
 
     private int m_damage;
     private int m_charges;
+
+    private bool m_shieldActive = false;
+    private float m_shieldDuration;
+    private float m_shieldCooldown;
+    private float m_lastShieldTime = 0;
 
     private void Awake()
     {
@@ -85,6 +90,8 @@ public class PlayerScript : MonoBehaviour
         m_health = m_maxHealth;
         m_damage = 1;
         m_charges = 1;
+        m_shieldDuration = 2;
+        m_shieldCooldown = 30;
     }
 
     public void changeShootCooldown(float multiplier)
@@ -111,6 +118,19 @@ public class PlayerScript : MonoBehaviour
     public void changePierce(int added)
     {
         m_charges += added;
+    }
+
+    public void upgradeSpecialAttacks(float positiveMultiplier)
+    {
+        float negativeMultiplier = 1 - (positiveMultiplier - 1);
+
+
+        if(m_shieldCooldown > m_shieldDuration + 5)
+        {
+            m_shieldCooldown *= negativeMultiplier;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -149,12 +169,48 @@ public class PlayerScript : MonoBehaviour
 
         m_time += Time.deltaTime;
 
+        if (Input.GetKey(KeyCode.C))
+        {
+            activateShield();
+        }
+
+        float cooldownLeft = m_lastShieldTime - seconds;
+        if(cooldownLeft>0)
+        {
+            cooldownText.text = "shield cd: " + (int)cooldownLeft;
+        }
+        else
+        {
+            cooldownText.text = "shield cd: 0";
+        }
+
+        if(m_shieldActive && m_lastShieldTime - m_shieldCooldown + m_shieldDuration < seconds )
+        {
+            renderer.color = new Color(1, 1, 1, 1);
+            m_shieldActive = false;
+        }
+
+
     }
 
     private void FixedUpdate()
     {
         ProceedMovement();
         ProceedRotation();
+    }
+
+    private void activateShield()
+    {
+        if (m_lastShieldTime < seconds)
+        {
+            m_lastShieldTime = seconds + m_shieldCooldown;
+            Color oldColor = renderer.color;
+            if (!oldColor.Equals(new Color(2, 0, 0)))
+            {
+                m_shieldActive = true;
+                renderer.color = new Color(0, 2, 0);
+            }
+        }
     }
 
     public void ProceedRotation()
@@ -213,10 +269,20 @@ public class PlayerScript : MonoBehaviour
 
     public void attackMe(int damage)
     {
+        if(m_shieldActive)
+        {
+            return;
+        }
         m_health -= damage;
         if(m_health<=0)
         {
             Dead();
+        }
+        else
+        {
+            var color = renderer.color;
+            renderer.color = new Color(2, 0, 0);
+            StartCoroutine(timedColourSet(0.3f, color));
         }
     }
 
@@ -231,5 +297,12 @@ public class PlayerScript : MonoBehaviour
             m_time = 0;
         }
     }
+
+    private IEnumerator timedColourSet(float duration, Color color)
+    {
+        yield return new WaitForSeconds(duration);
+        renderer.color = color;
+    }
+
 
 }
