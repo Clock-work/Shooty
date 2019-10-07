@@ -32,7 +32,7 @@ public class UpdateScript : MonoBehaviour
     [SerializeField]
     public PlayerScript player;
 
-    private int m_moveCost = 5;
+    private int m_moveCost = 2;
     private int m_cooldownCost = 1;
     private int m_healthCost = 20;
     private int m_damageCost = 100;
