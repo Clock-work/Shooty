@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SeekingEnemy : DefaultEnemy
 {
-    new public static DefaultEnemy createRandomEnemy(float sizeMin = 3f, float sizeMax = 5f, float speedMin = 2f, float speedMax = 20f, float rotationSpeedMin = -1.3f, float rotationSpeedMax = 1.3f, float minCooldown = 0.5f, float maxCooldown = 1.0f)
+    public static DefaultEnemy createRandomEnemy(float sizeMin = 3f, float sizeMax = 5f, float speedMin = 2f, float speedMax = 20f, float rotationSpeedMin = -1.3f, float rotationSpeedMax = 1.3f, float minCooldown = 0.5f, float maxCooldown = 1.0f)
     {
         float widthHeight = Random.Range(sizeMin, sizeMax);
 

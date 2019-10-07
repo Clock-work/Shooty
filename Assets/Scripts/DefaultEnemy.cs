@@ -129,13 +129,15 @@ public class DefaultEnemy : MonoBehaviour
         m_points = 10;
     }
 
-    //called after enemy is destroyed and removed
+    //called after enemy is hit by bullet
     protected virtual void onDeath()
     {
         if(m_points>0)
         {
             PlayerScript.instance.update.points += (int)m_points;
         }
+        var gameobject = Instantiate((GameObject)Resources.Load("Prefabs/Enemies/DeathAnimation"), new Vector3(this.transform.position.x, this.transform.position.y, -1), Quaternion.identity);
+        gameobject.transform.localScale = new Vector3(this.transform.localScale.x, this.transform.localScale.y, 1);
     }
 
     //checks for potential collision with the point
@@ -149,6 +151,7 @@ public class DefaultEnemy : MonoBehaviour
         m_health -= damage;
         if (m_health <= 0)
         {
+            this.onDeath();
             Destroy(this.gameObject);
         }
     }
@@ -178,7 +181,6 @@ public class DefaultEnemy : MonoBehaviour
         {
             enemies.Remove(this);
         }
-        this.onDeath();
     }
 
     // Update is called once per frame

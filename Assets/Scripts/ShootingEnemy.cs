@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootingEnemy : DefaultEnemy
 {
-    new public static DefaultEnemy createRandomEnemy(float sizeMin = 3f, float sizeMax = 5f, float speedMin = 2f, float speedMax = 20f, float rotationSpeedMin = -1.3f, float rotationSpeedMax = 1.3f, float minCooldown = 0.5f, float maxCooldown = 1.0f,
+    public static DefaultEnemy createRandomEnemy(float sizeMin = 3f, float sizeMax = 5f, float speedMin = 2f, float speedMax = 20f, float rotationSpeedMin = -1.3f, float rotationSpeedMax = 1.3f, float minCooldown = 0.5f, float maxCooldown = 1.0f,
         float minProjectileSize = 1.0f, float maxProjectileSize = 1.5f, float minProjectileSpeed = 25f, float maxProjectileSpeed = 50f, int minProjectileDamage = 1, int maxProjectileDamage = 1)
     {
         float widthHeight = Random.Range(sizeMin, sizeMax);
