@@ -49,11 +49,11 @@ public class BoundsManager : MonoBehaviour
 
         if(Input.GetKey(KeyCode.UpArrow))
         {
-            changeBoundSize(1);
+            //changeBoundSize(1);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            changeBoundSize(-1);
+            //changeBoundSize(-1);
         }
 
     }
