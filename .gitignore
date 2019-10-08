@@ -14,18 +14,12 @@
 *.pch
 
 # Compiled Dynamic libraries
-*.so
-*.dylib
 
 # Fortran module files
 *.mod
 *.smod
 
 # Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
 
 #exclude temp
 Temp/
@@ -74,7 +68,6 @@ ExportedObj/
 *.booproj
 *.svd
 *.pdb
-*.mdb
 *.opendb
 *.VC.db
 
@@ -87,8 +80,6 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
-*.unitypackage
 
 # Crashlytics generated file
 crashlytics-build.properties
