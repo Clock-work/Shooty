@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
 
     private Collider2D m_collider;
 
-    private const float playerSafeAreaRadius = 15;
+    private const float playerSafeAreaRadius = 20;
 
     private AudioSource m_shootSound;
 
@@ -140,7 +140,7 @@ public class PlayerScript : MonoBehaviour
 
         seconds += Time.deltaTime;
 
-        if(Input.GetKey(KeyCode.Space) == true)
+        if(Input.GetKey(KeyCode.Space) == true || Input.GetKey(KeyCode.Mouse0))
         {
             shootProjectile();
             if(movement == Vector2.zero)
@@ -224,24 +224,24 @@ public class PlayerScript : MonoBehaviour
     public void ProceedMovement() {
         movement.x = 0;
         movement.y = 0;
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             movement.x -= 1;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             movement.x += 1;
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             movement.y += 1;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             movement.y -= 1;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) == false)
+        if (false && Input.GetKey(KeyCode.LeftShift) == false)//temp boost disabled
         {
             rigidbody.velocity = movement.normalized * movementSpeed;
         }
@@ -304,5 +304,9 @@ public class PlayerScript : MonoBehaviour
         renderer.color = color;
     }
 
+    public int getSecondsAlive()
+    {
+        return (int)seconds;
+    }
 
 }

@@ -25,11 +25,11 @@ public class EnemySpawner : MonoBehaviour
             m_counter = m_spawnInterval;
             m_rotationSpeedMin = -1.5f;
             m_rotationSpeedMax = 1.5f;
-            m_sizeMin = 1.5f;
-            m_sizeMax = 6f;
+            m_sizeMin = 2.5f;
+            m_sizeMax = 5f;
 
-            m_speedMin = 5f;
-            m_speedMax = 10f;
+            m_speedMin = 6f;
+            m_speedMax = 7f;
 
 
             m_spawnInterval = 5.0f;
@@ -59,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
             DefaultEnemy.createRandomEnemy(m_sizeMin, m_sizeMax, m_speedMin, m_speedMax, m_rotationSpeedMin, m_rotationSpeedMax);
             if(m_spawnInterval>2f)
             {
-                m_spawnInterval *= 0.9625f;
+                m_spawnInterval *= 0.97f;
             }
             if (m_speedMax < 50.0f)
             {
@@ -79,10 +79,10 @@ public class EnemySpawner : MonoBehaviour
         public SeekingSpawner(float delay)
              : base(delay)
         {
-            m_speedMin = 8f;
-            m_speedMax = 16f;
+            m_speedMin = 9f;
+            m_speedMax = 10;
 
-            m_cooldownMin = 0.5f;
+            m_cooldownMin = 0.9f;
             m_cooldownMax = 1f;
 
             m_spawnInterval = 10.0f;
@@ -92,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
             SeekingEnemy.createRandomEnemy(m_sizeMin, m_sizeMax, m_speedMin, m_speedMax, m_rotationSpeedMin, m_rotationSpeedMax, m_cooldownMin, m_cooldownMax);
             if (m_spawnInterval > 2f)
             {
-                m_spawnInterval *= 0.875f;
+                m_spawnInterval *= 0.9f;
             }
 
             if (m_speedMax < 40.0f)
@@ -126,14 +126,14 @@ public class EnemySpawner : MonoBehaviour
             : base(delay)
         {
             m_speedMin = 5f;
-            m_speedMax = 10f;
+            m_speedMax = 6f;
 
-            m_cooldownMin = 0.5f;
+            m_cooldownMin = 0.9f;
             m_cooldownMax = 1f;
-            m_projectileSizeMin = 0.5f;
-            m_projectileSizeMax = 2f;
-            m_projecdtileSpeedMin = 25f;
-            m_projecdtileSpeedMax = 50f;
+            m_projectileSizeMin = 0.9f;
+            m_projectileSizeMax = 1.1f;
+            m_projecdtileSpeedMin = 29f;
+            m_projecdtileSpeedMax = 31;
 
             m_spawnInterval = 15.0f;
         }
@@ -143,7 +143,7 @@ public class EnemySpawner : MonoBehaviour
             ShootingEnemy.createRandomEnemy(m_sizeMin, m_sizeMax, m_speedMin, m_speedMax, m_rotationSpeedMin, m_rotationSpeedMax, m_cooldownMin, m_cooldownMax, m_projectileSizeMin, m_projectileSizeMax, m_projecdtileSpeedMin, m_projecdtileSpeedMax);
             if (m_spawnInterval > 2f)
             {
-                m_spawnInterval *= 0.825f;
+                m_spawnInterval *= 0.9f;
             }
 
             if (m_speedMax < 30.0f)
