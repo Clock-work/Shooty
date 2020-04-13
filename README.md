@@ -1,5 +1,1 @@
-# Shooty, a LudumDare 45 game made with unity 
-
-# Directly download binaries with smartgit:
-windows: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Clock-work/LudumDare45Game/tree/master/build/windows
-linux: https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/Clock-work/LudumDare45Game/tree/master/build/inux
+# Shooty, a game made with unity 
