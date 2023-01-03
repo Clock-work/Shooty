@@ -40,7 +40,7 @@ public class UpdateScript : MonoBehaviour
     private int m_healthCost = 20;
     private int m_damageCost = 100;
     private int m_pierceCost = 75;
-    private int m_specialCost = 10;
+    private int m_projSpeedCost = 3;
 
     private void Awake()
     {
@@ -50,7 +50,7 @@ public class UpdateScript : MonoBehaviour
         healthUpgrade.onClick.AddListener(increaseHealth);
         damageUpgrade.onClick.AddListener(increaseDamage);
         pierceUpgrade.onClick.AddListener(increasePierce);
-        specialUpgrade.onClick.AddListener(addSpecial);
+        specialUpgrade.onClick.AddListener(addProjSpeed);
     }
 
     void Start()
@@ -68,7 +68,7 @@ public class UpdateScript : MonoBehaviour
         damageUpgrade.GetComponentInChildren<Text>().text = "Damage cost(4): " + m_damageCost;
 
         pierceUpgrade.GetComponentInChildren<Text>().text = "Pierce cost(5): " + m_pierceCost;
-        specialUpgrade.GetComponentInChildren<Text>().text = "Special cost(6): " + m_specialCost;
+        specialUpgrade.GetComponentInChildren<Text>().text = "Proj Speed cost(6): " + m_projSpeedCost;
 
         timeField.GetComponentInChildren<Text>().text = "Time: " + player.getSecondsAlive() + "s";
 
@@ -94,7 +94,7 @@ public class UpdateScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            addSpecial();
+            addProjSpeed();
         }
 
     }
@@ -149,13 +149,13 @@ public class UpdateScript : MonoBehaviour
         }
     }
 
-    void addSpecial()
+	void addProjSpeed()
     {
-        if (points >= m_specialCost)
+        if (points >= m_projSpeedCost)
         {
-            points -= m_specialCost;
-            m_specialCost *= 2;
-            player.upgradeSpecialAttacks(1.1f);
+            points -= m_projSpeedCost;
+            m_projSpeedCost *= 2;
+            player.changeProjectileSpeed(1.15f);
         }
     }
 

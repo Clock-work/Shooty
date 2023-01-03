@@ -70,6 +70,7 @@ public class PlayerScript : MonoBehaviour
     private float m_shieldDuration;
     private float m_shieldCooldown;
     private float m_lastShieldTime = 0;
+	private float m_projectileSpeed = 45f;
 
     private void Awake()
     {
@@ -90,7 +91,7 @@ public class PlayerScript : MonoBehaviour
         m_health = m_maxHealth;
         m_damage = 1;
         m_charges = 1;
-        m_shieldDuration = 2;
+        m_shieldDuration = 3;
         m_shieldCooldown = 30;
     }
 
@@ -120,17 +121,18 @@ public class PlayerScript : MonoBehaviour
         m_charges += added;
     }
 
+    public void changeProjectileSpeed(float multiplier)
+    {
+        m_projectileSpeed *= multiplier;
+    }
+
     public void upgradeSpecialAttacks(float positiveMultiplier)
     {
         float negativeMultiplier = 1 - (positiveMultiplier - 1);
-
-
         if(m_shieldCooldown > m_shieldDuration + 5)
         {
             m_shieldCooldown *= negativeMultiplier;
         }
-
-
     }
 
     // Update is called once per frame
@@ -204,12 +206,8 @@ public class PlayerScript : MonoBehaviour
         if (m_lastShieldTime < seconds)
         {
             m_lastShieldTime = seconds + m_shieldCooldown;
-            Color oldColor = renderer.color;
-            if (!oldColor.Equals(new Color(2, 0, 0)))
-            {
-                m_shieldActive = true;
-                renderer.color = new Color(0, 2, 0);
-            }
+            m_shieldActive = true;
+            renderer.color = new Color(0, 2, 0);
         }
     }
 
@@ -280,9 +278,8 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            var color = renderer.color;
             renderer.color = new Color(2, 0, 0);
-            StartCoroutine(timedColourSet(0.3f, color));
+            StartCoroutine(resetColour(0.3f));
         }
     }
 
@@ -293,8 +290,17 @@ public class PlayerScript : MonoBehaviour
             m_shootSound.Play();
             Vector3 direction = this.transform.up.normalized;
             var projectilePos = new Vector2(transform.position.x, transform.position.y) + new Vector2(direction.x * transform.localScale.x / 2, direction.y * transform.localScale.y / 2);
-            Projectile.createNewProjectile(projectilePos, new Vector2(1.2f, 1.2f), this.transform.rotation, new Vector2(direction.x, direction.y), 45f, true, m_damage, m_charges);
+			Projectile.createNewProjectile(projectilePos, new Vector2(1.2f, 1.2f), this.transform.rotation, new Vector2(direction.x, direction.y), m_projectileSpeed, true, m_damage, m_charges);
             m_time = 0;
+        }
+    }
+	
+	private IEnumerator resetColour(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if(!m_shieldActive)
+        {
+            renderer.color = new Color(1, 1, 1, 1);
         }
     }
 
